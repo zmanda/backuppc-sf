@@ -11,7 +11,7 @@
 #   Craig Barratt  <cbarratt@users.sourceforge.net>
 #
 # COPYRIGHT
-#   Copyright (C) 2002-2003  Craig Barratt
+#   Copyright (C) 2002  Craig Barratt
 #
 #   This program is free software; you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@
 #
 #========================================================================
 #
-# Version 2.1.0_CVS, released 3 Jul 2003.
+# Version 2.0.0, released 14 Jun 2003.
 #
 # See http://backuppc.sourceforge.net.
 #
@@ -52,9 +52,9 @@ BEGIN {
         $RsyncLibOK = 0;
         $RsyncLibErr = "File::RsyncP module doesn't exist";
     } else {
-        if ( $File::RsyncP::VERSION < 0.41 ) {
+        if ( $File::RsyncP::VERSION < 0.44 ) {
             $RsyncLibOK = 0;
-            $RsyncLibErr = "File::RsyncP module version too old: need 0.41";
+            $RsyncLibErr = "File::RsyncP module version too old: need 0.44";
         } else {
             $RsyncLibOK = 1;
         }
@@ -176,8 +176,17 @@ sub start
                 # To make this easier we do all the includes first and all
                 # of the excludes at the end (hopefully they commute).
                 #
+                $file =~ s{/$}{};
                 $file = "/$file";
                 $file =~ s{//+}{/}g;
+		if ( $file eq "/" ) {
+		    #
+		    # This is a special case: if the user specifies
+		    # "/" then just include it and don't exclude "/*".
+		    #
+                    push(@inc, $file) if ( !$incDone{$file} );
+		    next;
+		}
                 my $f = "";
                 while ( $file =~ m{^/([^/]*)(.*)} ) {
                     my $elt = $1;
