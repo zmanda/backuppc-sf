@@ -575,9 +575,8 @@ $Lang{Backup_browse_for__host} = <<EOF;
 <li> Sie browsen das Backup #\$num, erstellt am \$backupTime
         (vor \$backupAge Tagen),
 \$filledBackup
-<li> Klicken Sie auf ein Verzeichnis um dieses zu durchsuchen,
-<li> Klicken Sie auf eine Datei um diese per download wiederherzustellen,
-<li> (ENGLISH) You can view the backup <a href="\$MyURL?action=dirHistory&host=\${EscURI(\$host)}&share=\$shareURI&dir=\$pathURI">history</a> of the current directory.
+<li> Klicken Sie auf ein Verzeichnis um dieses zu durchsuchen.
+<li> Klicken Sie auf eine Datei um diese per download wiederherzustellen.
 </ul>
 
 \${h2("Inhalt von \${EscHTML(\$dirDisplay)}")}
@@ -613,46 +612,6 @@ This is now in the checkAll row
 -->
 </td></tr></table>
 </form>
-EOF
-
-# ------------------------------
-$Lang{DirHistory_backup_for__host} = "(ENGLISH) BackupPC: Directory backup history for \$host";
-
-#
-# These two strings are used to build the links for directories and
-# file versions.  Files are appended with a version number.
-#
-$Lang{DirHistory_dirLink}  = "(ENGLISH) dir";
-$Lang{DirHistory_fileLink} = "(ENGLISH) v";
-
-$Lang{DirHistory_for__host} = <<EOF;
-\${h1("Directory backup history for \$host")}
-(ENGLISH)
-<p>
-This display shows each unique version of files across all
-the backups:
-<ul>
-<li> Click on a backup number to return to the backup browser,
-<li> Click on a directory link (\$Lang->{DirHistory_dirLink}) to navigate
-     into that directory,
-<li> Click on a file version link (\$Lang->{DirHistory_fileLink}0,
-     \$Lang->{DirHistory_fileLink}1, ...) to download that file,
-<li> Files with the same contents between different backups have the same
-     version number,
-<li> Files or directories not present in a particular backup have an
-     empty box.
-<li> Files shown with the same version might have different attributes.
-     Select the backup number to see the file attributes.
-</ul>
-
-\${h2("History of \${EscHTML(\$dirDisplay)}")}
-
-<br>
-<table border bgcolor="#ffffcc">
-<tr bgcolor="\$Conf{CgiHeaderBgColor}"><td>Backup number</td>\$backupNumStr</tr>
-<tr bgcolor="\$Conf{CgiHeaderBgColor}"><td>Backup time</td>\$backupTimeStr</tr>
-\$fileStr
-</table>
 EOF
 
 # ------------------------------

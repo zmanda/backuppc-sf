@@ -11,7 +11,7 @@
 #   Craig Barratt  <cbarratt@users.sourceforge.net>
 #
 # COPYRIGHT
-#   Copyright (C) 2001-2003  Craig Barratt
+#   Copyright (C) 2001  Craig Barratt
 #
 #   This program is free software; you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@
 #
 #========================================================================
 #
-# Version 2.1.0_CVS, released 3 Jul 2003.
+# Version 2.0.1, released 5 Oct 2003.
 #
 # See http://backuppc.sourceforge.net.
 #
@@ -247,7 +247,7 @@ sub write
     my $n = length($$dataRef);
 
     return if ( !$self->{write} );
-    print($$dataRef) if ( $self->{writeTeeStdout} );
+    print(STDERR $$dataRef) if ( $self->{writeTeeStdout} );
     return 0 if ( $n == 0 );
     if ( !$self->{compress} ) {
         #
